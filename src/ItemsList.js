@@ -4,7 +4,6 @@ import Item from "./Item";
 
 export default function ItemList(props) {
   const { items, addItemToCart, removeItemToCart } = props;
-  console.log(props);
   return (
     <List
       grid={{

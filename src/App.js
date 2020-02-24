@@ -73,7 +73,7 @@ export default class App extends Component {
           >
             <Menu.Item>
               <Cart
-                items={items}
+                items={ items }
                 removeItemToCart={(id)=> this.removeItemToCart(id)}
               ></Cart>
             </Menu.Item>
