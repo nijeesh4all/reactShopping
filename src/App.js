@@ -1,7 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
+import { Layout, Menu } from "antd";
+
 import ItemList from "./ItemsList";
+import Cart from "./Cart";
 
 import "antd/dist/antd.css";
+
+const { Header, Content } = Layout;
 
 const items = [
   {
@@ -40,24 +45,48 @@ const items = [
   }
 ];
 
-function App() {
-  const addItemToCart = id => {
+export default class App extends Component {
+  state = { items }
+  addItemToCart(id) {
+
     const item = items.find(_item => _item.id === id);
     item.bought = item.bought + 1;
-  };
+    this.setState({items})
+  }
 
-  const removeItemToCart = id => {
+  removeItemToCart(id) {
     const item = items.find(_item => _item.id === id);
     item.bought = item.bought - 1;
-  };
+    this.setState({items})
+  }
 
-  return (
-    <ItemList
-      items={items}
-      addItemToCart={addItemToCart}
-      removeItemToCart={removeItemToCart}
-    ></ItemList>
-  );
+  render() {
+    return (
+      <Layout>
+        <Header>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            style={{ lineHeight: "64px", float: "right" }}
+            selectable={false}
+          >
+            <Menu.Item>
+              <Cart
+                items={items}
+                removeItemToCart={(id)=> this.removeItemToCart(id)}
+              ></Cart>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Content style={{ padding: "50px 50px" }}>
+          <ItemList
+            items={items}
+            addItemToCart={(id)=>this.addItemToCart(id)}
+            removeItemToCart={(id)=> this.removeItemToCart(id)}
+          ></ItemList>
+        </Content>
+      </Layout>
+    );
+  }
 }
-
-export default App;
