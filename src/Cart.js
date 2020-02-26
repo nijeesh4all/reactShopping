@@ -3,14 +3,8 @@ import { Badge, Icon, Popover, List } from "antd";
 import CartItem from "./CartItem";
 
 export default class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.items = props.items;
-    this.removeItemToCart = props.removeItemToCart;
-  }
-
   render() {
-    const cartTotal = this.items.reduce((sum, item) => {
+    const cartTotal = this.props.items.reduce((sum, item) => {
       return sum + item.bought * item.price;
     }, 0);
     const listContent = (
@@ -41,7 +35,7 @@ export default class Cart extends Component {
   }
 
   cartItems() {
-    const boughtItems = this.items.filter(item => item.bought !== 0);
+    const boughtItems = this.props.items.filter(item => item.bought !== 0);
     if (boughtItems.length !== 0) {
       return boughtItems.map(item => {
         return <CartItem key={item.id} item={item}></CartItem>;
@@ -52,6 +46,6 @@ export default class Cart extends Component {
   }
 
   boughtItems() {
-    return this.items.reduce((count, item) => item.bought + count, 0);
+    return this.props.items.reduce((count, item) => item.bought + count, 0);
   }
 }
