@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { List, Avatar } from 'antd';
 
 const CartItem = (props) =>{
         return (
             <List.Item style={{maxWidth: '400px'}}
-            actions={[ <span> Cost { props.item.bought * props.item.price } </span> ]}
+            actions={[ <span> Cost { props.item.bought * props.item.price } RS</span> ]}
             >
                 <List.Item.Meta
                     avatar={<Avatar src={props.item.imageUrl} />}

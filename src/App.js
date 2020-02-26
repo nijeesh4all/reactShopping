@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Layout, Menu } from "antd";
+import "antd/dist/antd.css";
 
 import ItemList from "./ItemsList";
 import Cart from "./Cart";
 
-import "antd/dist/antd.css";
-
 const { Header, Content } = Layout;
 
-const items = [
+const initalItems = [
   {
     id: 1,
     imageUrl:
@@ -46,18 +45,24 @@ const items = [
 ];
 
 export default class App extends Component {
-  state = { items }
-  addItemToCart(id) {
+  state = { items: initalItems }
 
-    const item = items.find(_item => _item.id === id);
-    item.bought = item.bought + 1;
-    this.setState({items})
-  }
+  addItemToCart(id) {
+    this.setState((prevState)=>{
+      const item_index = this.state.items.findIndex(_item => _item.id === id);
+      const newItems = [...prevState.items];
+      newItems[item_index].bought++
+      return {items: newItems};
+    })
+    }
 
   removeItemToCart(id) {
-    const item = items.find(_item => _item.id === id);
-    item.bought = item.bought - 1;
-    this.setState({items})
+    this.setState((prevState)=>{
+      const item_index = this.state.items.findIndex(_item => _item.id === id);
+      const newItems = [...prevState.items];
+      newItems[item_index].bought--
+      return {items: newItems};
+    })
   }
 
   render() {
@@ -67,13 +72,12 @@ export default class App extends Component {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
             style={{ lineHeight: "64px", float: "right" }}
             selectable={false}
           >
             <Menu.Item>
               <Cart
-                items={ items }
+                items={ this.state.items }
                 removeItemToCart={(id)=> this.removeItemToCart(id)}
               ></Cart>
             </Menu.Item>
@@ -81,7 +85,7 @@ export default class App extends Component {
         </Header>
         <Content style={{ padding: "50px 50px" }}>
           <ItemList
-            items={items}
+            items={this.state.items}
             addItemToCart={(id)=>this.addItemToCart(id)}
             removeItemToCart={(id)=> this.removeItemToCart(id)}
           ></ItemList>

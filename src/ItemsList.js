@@ -2,8 +2,7 @@ import React from "react";
 import { List } from "antd";
 import Item from "./Item";
 
-export default function ItemList(props) {
-  const { items, addItemToCart, removeItemToCart } = props;
+export default function ItemList({ items, addItemToCart, removeItemToCart }) {
   return (
     <List
       grid={{

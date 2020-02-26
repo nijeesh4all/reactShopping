@@ -17,7 +17,7 @@ export default class Cart extends Component {
       <List
         footer={
           <div>
-            <span> Cart Total : <strong>{cartTotal}</strong> </span>
+            <span style={{textAlign: "center"}}> Cart Total : <strong>{cartTotal}</strong> </span>
           </div>
         }
       >
