@@ -7,7 +7,9 @@ export default function ItemList(props) {
   return (
     <List
       grid={{
-        xxl: 4
+        xxl: 6,
+        sm: 1,
+        lg: 4
       }}
       dataSource={items}
       renderItem={item => (
