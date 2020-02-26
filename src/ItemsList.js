@@ -9,7 +9,8 @@ export default function ItemList(props) {
       grid={{
         xxl: 6,
         sm: 1,
-        lg: 4
+        lg: 4,
+        md: 2
       }}
       dataSource={items}
       renderItem={item => (
